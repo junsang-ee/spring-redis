@@ -24,3 +24,7 @@ hs_err_pid*
 
 # IDE binary
 .idea
+
+spring-server/.gradle
+spring-server/.gradle/*
+spring-server/build
