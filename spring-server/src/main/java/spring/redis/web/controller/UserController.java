@@ -1,11 +1,9 @@
 package spring.redis.web.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.redis.web.model.dto.request.UserSaveRequest;
+import spring.redis.web.model.dto.response.UserDetailResponse;
 import spring.redis.web.model.entity.UserEntity;
 import spring.redis.web.service.UserService;
 
@@ -18,5 +16,10 @@ public class UserController {
     @PostMapping()
     public UserEntity save(@RequestBody UserSaveRequest userSaveRequest) {
         return userService.save(userSaveRequest);
+    }
+
+    @GetMapping("/{userId}")
+    public UserDetailResponse get(@PathVariable String userId) {
+        return userService.get(userId);
     }
 }
