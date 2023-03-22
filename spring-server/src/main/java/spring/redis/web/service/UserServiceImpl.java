@@ -28,8 +28,6 @@ public class UserServiceImpl implements UserService{
         UserEntity userEntity = userRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("not exists user")
         );
-        String version = org.springframework.core.SpringVersion.getVersion();
-        log.info("version : " + version);
         return getDetailUserReponse(userEntity);
     }
 
