@@ -1,6 +1,7 @@
 package spring.redis.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 import spring.redis.web.model.dto.request.UserSaveRequest;
 import spring.redis.web.model.dto.response.UserDetailResponse;
@@ -18,6 +19,7 @@ public class UserController {
         return userService.save(userSaveRequest);
     }
 
+    @Cacheable(cacheNames = "userDetailResponse")
     @GetMapping("/{userId}")
     public UserDetailResponse get(@PathVariable String userId) {
         return userService.get(userId);

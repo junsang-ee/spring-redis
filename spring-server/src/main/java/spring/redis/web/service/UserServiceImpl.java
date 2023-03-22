@@ -1,6 +1,7 @@
 package spring.redis.web.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import spring.redis.web.model.dto.request.UserSaveRequest;
 import spring.redis.web.model.dto.response.UserDetailResponse;
@@ -9,6 +10,7 @@ import spring.redis.web.repository.UserRepository;
 
 import javax.transaction.Transactional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService{
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService{
         UserEntity userEntity = userRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("not exists user")
         );
+        String version = org.springframework.core.SpringVersion.getVersion();
+        log.info("version : " + version);
         return getDetailUserReponse(userEntity);
     }
 
@@ -33,6 +37,7 @@ public class UserServiceImpl implements UserService{
         UserEntity userEntity = new UserEntity();
         userEntity.setName(userSaveRequest.getName());
         userEntity.setAge(userSaveRequest.getAge());
+
         return userEntity;
     }
 
